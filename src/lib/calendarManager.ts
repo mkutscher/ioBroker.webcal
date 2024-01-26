@@ -24,6 +24,8 @@ export class jsonEvent {
 	endTime?: string;
 	calendarName: string;
 	summary?: string;
+	fgColor?: string;
+	bgColor?: string;
 
 	constructor(event: CalendarEvent, date: Date, startTime?: string, endTime?: string) {
 		this.id = event.id;
@@ -32,6 +34,8 @@ export class jsonEvent {
 		this.date = date;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.fgColor = event.fgColor;
+		this.bgColor = event.bgColor;
 	}
 
 	toString(): string {
@@ -53,6 +57,8 @@ export abstract class CalendarEvent implements webcal.ICalendarEventBase {
 	maxUnixTime: number;
 	summary?: string;
 	description?: string;
+	fgColor?: string;
+	bgColor?: string;
 
 	constructor(endDate: Date, calendarName: string, id: string | null) {
 		this.id = id;

@@ -47,6 +47,8 @@ class jsonEvent {
     this.date = date;
     this.startTime = startTime;
     this.endTime = endTime;
+    this.fgColor = event.fgColor;
+    this.bgColor = event.bgColor;
   }
   toString() {
     return this.isAllday() ? i18n.allDay : (this.startTime ? i18n["from"] + " " + this.startTime : "") + (this.endTime ? (this.startTime ? " " : "") + i18n["until"] + " " + this.endTime : "");
