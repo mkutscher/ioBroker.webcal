@@ -169,9 +169,32 @@ This project uses the following components:
 ## Changelog
 <!--
 	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**	* ()
+	### **WORK IN PROGRESS**
+  * ()
 
 -->
+### 1.3.7 (2024-05-20)
+  * (dirkhe) improve logging
+  * (dirkhe) fix passort was not stored
+
+### 1.3.6 (2024-05-18)
+  * (dirkhe) fix bug in repeated events
+
+### 1.3.5 (2024-05-05)
+* (dirkhe) increase dependecy adapter-core
+* (dirkhe) fix json config
+* (dirkhe) update dependecies
+
+### 1.3.3 (2024-04-07)	
+* (dirkhe) fix config validation
+* (dirkhe) update dependecies
+* (dirkhe) update year for copyright #56
+* (dirkhe) increase to node 18 for CI Pipeline
+
+### 1.3.2 (2024-02-23)
+* (dirkhe) update dependecies
+* (dirkhe) linting
+
 ### 1.3.0 (2023-10-31)	
 * (dirkhe) add choose calendar for events
 * (dirkhe) add example script for vis-material-designmaterial
@@ -236,7 +259,7 @@ This project uses the following components:
 ## License
 MIT License
 
-Copyright (c) 2023 dirkhe 
+Copyright (c) 2024 dirkhe 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

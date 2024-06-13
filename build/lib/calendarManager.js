@@ -18,6 +18,10 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
@@ -57,7 +61,7 @@ class jsonEvent {
     return !this.startTime && !this.endTime;
   }
 }
-const _CalendarEvent = class {
+const _CalendarEvent = class _CalendarEvent {
   constructor(endDate, calendarName, id) {
     this.id = id;
     this.calendarName = calendarName;
@@ -67,13 +71,13 @@ const _CalendarEvent = class {
     const content = (this.summary || "") + (this.description || "");
     if (content.length) {
       adapter.log.debug(
-        "check calendar(" + this.calendarName + ") event " + (this.summary || "") + " " + (this.description || "")
+        "check calendar(" + this.calendarName + ") event '" + (this.summary || "") + "' " + (this.description || "")
       );
       const eventHits = [];
       for (const evID in events) {
         const event = events[evID];
         if (event.checkCalendarContent(content, this.calendarName)) {
-          adapter.log.debug("  found event '" + event.name + "' in calendar event ");
+          adapter.log.debug("  found event '" + event.name + "' in calendar-event ");
           eventHits.push(event);
         }
       }
@@ -130,12 +134,18 @@ const _CalendarEvent = class {
           days[firstDay].endTime = time;
         }
       }
-      adapter.log.debug("days for calendar event(" + JSON.stringify(timeObj) + "): " + JSON.stringify(days));
+      const days_string = JSON.stringify(days);
+      if (days_string.length > 2) {
+        adapter.log.debug("days for calendar-event(" + JSON.stringify(timeObj) + "): " + days_string);
+      } else {
+        adapter.log.silly("no days for calendar-event(" + JSON.stringify(timeObj) + ") found ");
+      }
     }
     return days;
   }
   static parseDateTime(dateString) {
     const dateTimeObj = {
+      // first we use year, minute and day numbers as index
       year: 0,
       month: 1,
       day: 2,
@@ -189,10 +199,10 @@ const _CalendarEvent = class {
     return new String("20" + date.year).slice(-4).concat("-", new String("0" + date.month).slice(-2), "-", new String("0" + date.day).slice(-2));
   }
 };
+_CalendarEvent.daysFuture = 3;
+_CalendarEvent.daysPast = 0;
+_CalendarEvent.todayMidnight = (0, import_dayjs.default)().startOf("d");
 let CalendarEvent = _CalendarEvent;
-CalendarEvent.daysFuture = 3;
-CalendarEvent.daysPast = 0;
-CalendarEvent.todayMidnight = (0, import_dayjs.default)().startOf("d");
 class CalendarManager {
   constructor(adapterInstance, i18nInstance) {
     this.defaultCalendar = null;
@@ -212,12 +222,17 @@ class CalendarManager {
       }
     }
   }
+  /**
+   * get data from all calendars
+   * @returns Array of CalendarEvents
+   */
   async fetchCalendars() {
     CalendarEvent.todayMidnight = (0, import_dayjs.default)().startOf("D");
     const calEvents = [];
     const startDate = CalendarEvent.todayMidnight.add(-CalendarEvent.daysPast, "d").toDate();
     const endDate = CalendarEvent.todayMidnight.add(CalendarEvent.daysFuture, "d").endOf("D").toDate();
     for (const c in this.calendars) {
+      adapter.log.debug("fetching Calendar " + c);
       const error = await this.calendars[c].loadEvents(calEvents, startDate, endDate);
       if (error) {
         adapter.log.error("could not fetch Calendar " + c + ": " + error);
@@ -225,6 +240,12 @@ class CalendarManager {
     }
     return calEvents;
   }
+  /**
+   * create new Event in calendar
+   * @param data
+   * @param calendarName optional name of calendar, otherwise default calender is used
+   * @returns Response Object
+   */
   async addEvent(data, calendarName) {
     const calendar = calendarName ? this.calendars[calendarName] : this.defaultCalendar;
     if (!calendar) {

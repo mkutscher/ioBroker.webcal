@@ -109,8 +109,7 @@
 							"filter": false,
 							"sort": false,
 							"multiple": true,
-							"default": null,
-							"showAllValues": false
+							"default": ""
 						},
 						{
 							"type": "selectSendTo",
@@ -207,13 +206,10 @@
 						},
 						{
 							"type": "password",
+							"attr": "password",
 							"repeat": false,
 							"visible": false,
-							"attr": "password",
-							"width": "10%",
 							"title": "Password/ Secret",
-							"filter": false,
-							"sort": false,
 							"default": false
 						},
 						{
