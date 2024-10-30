@@ -79,7 +79,7 @@ class IcalCalendarEvent extends import_calendarManager.CalendarEvent {
       const comp = new import_ical.default.Component(jcalData);
       const calTimezone = comp.getFirstSubcomponent("vtimezone");
       return new IcalCalendarEvent(
-        comp.getFirstSubcomponent("vevent"),
+        comp.getFirstSubcomponent("vevent") || void 0,
         calTimezone ? new import_ical.default.Timezone(calTimezone) : null,
         calendarName,
         startDate,
@@ -104,13 +104,19 @@ class IcalCalendarEvent extends import_calendarManager.CalendarEvent {
       }
     } catch (error) {
       adapter.log.error("could not read calendar Event: " + error);
-      this.icalEvent = null;
+      this.icalEvent = void 0;
     }
   }
   getNextTimeObj(isFirstCall) {
     let start;
     let end;
+    if (!this.icalEvent) {
+      return null;
+    }
     if (this.recurIterator) {
+      if (isFirstCall) {
+        this.recurIterator = this.icalEvent.iterator();
+      }
       start = this.recurIterator.next();
       if (start) {
         if (this.timezone) {
@@ -122,6 +128,7 @@ class IcalCalendarEvent extends import_calendarManager.CalendarEvent {
         try {
           end = this.icalEvent.getOccurrenceDetails(start).endDate;
         } catch (error) {
+          adapter.log.error("could not get next Time Object: " + error);
           return null;
         }
       } else {
@@ -154,9 +161,9 @@ class IcalCalendarEvent extends import_calendarManager.CalendarEvent {
     event.summary = data.summary;
     event.description = data.description || "ioBroker webCal";
     event.uid = (/* @__PURE__ */ new Date()).getTime().toString();
-    event.startDate = typeof data.startDate == "string" ? import_ical.default.Time.fromString(data.startDate) : import_ical.default.Time.fromData(data.startDate);
+    event.startDate = typeof data.startDate == "string" ? import_ical.default.Time.fromString(data.startDate, null) : import_ical.default.Time.fromData(data.startDate);
     if (data.endDate) {
-      event.endDate = typeof data.endDate == "string" ? import_ical.default.Time.fromString(data.endDate) : import_ical.default.Time.fromData(data.endDate);
+      event.endDate = typeof data.endDate == "string" ? import_ical.default.Time.fromString(data.endDate, null) : import_ical.default.Time.fromData(data.endDate);
     }
     cal.addSubcomponent(vevent);
     return cal.toString();

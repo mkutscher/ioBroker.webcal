@@ -54,7 +54,7 @@ export function getAllIcalCalendarEvents(
 
 export class IcalCalendarEvent extends CalendarEvent {
 	icalEvent?: ICAL.Event;
-	timezone?: ICAL.Timezone;
+	timezone?: ICAL.Timezone | null;
 	recurIterator?: ICAL.RecurExpansion;
 
 	static fromData(
@@ -70,7 +70,7 @@ export class IcalCalendarEvent extends CalendarEvent {
 			const calTimezone = comp.getFirstSubcomponent("vtimezone");
 
 			return new IcalCalendarEvent(
-				comp.getFirstSubcomponent("vevent"),
+				comp.getFirstSubcomponent("vevent") || undefined,
 				calTimezone ? new ICAL.Timezone(calTimezone) : null,
 				calendarName,
 				startDate,
@@ -84,8 +84,8 @@ export class IcalCalendarEvent extends CalendarEvent {
 	}
 
 	constructor(
-		eventComp: ICAL.Component,
-		calTimezone: ICAL.Timezone,
+		eventComp: ICAL.Component | undefined,
+		calTimezone: ICAL.Timezone | null,
 		calendarName: string,
 		startDate: Date,
 		endDate: Date,
@@ -122,14 +122,20 @@ export class IcalCalendarEvent extends CalendarEvent {
 			}
 		} catch (error) {
 			adapter.log.error("could not read calendar Event: " + error);
-			this.icalEvent = null;
+			this.icalEvent = undefined;
 		}
 	}
 
 	getNextTimeObj(isFirstCall: boolean): ICalendarTimeRangObj | null {
 		let start: ICAL.Time;
 		let end: ICAL.Time;
+		if (!this.icalEvent) {
+			return null;
+		}
 		if (this.recurIterator) {
+			if (isFirstCall) {
+				this.recurIterator = this.icalEvent.iterator();
+			}
 			start = this.recurIterator.next();
 			if (start) {
 				if (this.timezone) {
@@ -141,6 +147,7 @@ export class IcalCalendarEvent extends CalendarEvent {
 				try {
 					end = this.icalEvent.getOccurrenceDetails(start).endDate;
 				} catch (error) {
+					adapter.log.error("could not get next Time Object: " + error);
 					return null;
 				}
 			} else {
@@ -175,11 +182,13 @@ export class IcalCalendarEvent extends CalendarEvent {
 		event.uid = new Date().getTime().toString();
 		event.startDate =
 			typeof data.startDate == "string"
-				? ICAL.Time.fromString(data.startDate)
+				? ICAL.Time.fromString(data.startDate, null)
 				: ICAL.Time.fromData(data.startDate);
 		if (data.endDate) {
 			event.endDate =
-				typeof data.endDate == "string" ? ICAL.Time.fromString(data.endDate) : ICAL.Time.fromData(data.endDate);
+				typeof data.endDate == "string"
+					? ICAL.Time.fromString(data.endDate, null)
+					: ICAL.Time.fromData(data.endDate);
 		}
 		cal.addSubcomponent(vevent);
 		return cal.toString();

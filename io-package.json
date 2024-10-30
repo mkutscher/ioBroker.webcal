@@ -1,20 +1,46 @@
 {
   "common": {
     "name": "webcal",
-    "version": "1.3.8",
+    "version": "1.4.10",
     "news": {
+      "1.3.10": {
+        "en": "update dependecies\nfix calendar test functionality",
+        "de": "aktualisierung der abhängigkeiten\nkalendertest-funktionalität",
+        "ru": "обновление\nфункциональность календаря",
+        "pt": "atualizações\ncorrigir a funcionalidade de teste do calendário",
+        "nl": "afhankelijkheden bijwerken\nfix agenda test functionaliteit",
+        "fr": "mettre à jour les dépendances\ncorrection de la fonctionnalité de test de calendrier",
+        "it": "dipendenze dell'aggiornamento\ncorrezione della funzionalità di test del calendario",
+        "es": "dependencias de actualización\nfunción de prueba de calendario",
+        "pl": "uaktualnianie zależności\nnaprawić funkcjonalność testu kalendarza",
+        "uk": "оновлення залежності\nфункція перевірки календарів",
+        "zh-cn": "更新依赖关系\n固定日历测试功能"
+      },
+      "1.3.9": {
+        "en": "update dependecies",
+        "de": "aktualisierung der abhängigkeiten",
+        "ru": "обновление",
+        "pt": "atualizações",
+        "nl": "afhankelijkheden bijwerken",
+        "fr": "mettre à jour les dépendances",
+        "it": "dipendenze dell'aggiornamento",
+        "es": "dependencias de actualización",
+        "pl": "uaktualnianie zależności",
+        "uk": "оновлення залежності",
+        "zh-cn": "更新依赖关系"
+      },
       "1.3.8": {
-        "en": "improve logging\nfix passort was not stored",
-        "de": "verbesserung der protokollierung\nfix passort wurde nicht gespeichert",
-        "ru": "улучшение лесозаготовок\nне хранился",
-        "pt": "melhorar o registro\ncorrigir a páscoa não foi armazenada",
-        "nl": "verbeteren van het loggen\nfix passort is niet bewaard",
-        "fr": "améliorer l'exploitation\nfix passort n'a pas été stocké",
-        "it": "migliorare la registrazione\ncorrezione pasquart non è stato memorizzato",
-        "es": "mejorar el registro\npasillo de fijación no fue almacenado",
-        "pl": "poprawić wylogowanie\npassort fix nie został zapisany",
-        "uk": "покращити залогу\nфіксований пасорт не зберігався",
-        "zh-cn": "改进伐木\n固定传感器没有存储"
+        "en": "update dependecies\nallow download calendar without passwort\nfix missing monthly/yearly recurring",
+        "de": "aktualisierung der abhängigkeiten\nkalender ohne passwort herunterladen\nfehlerbehebung monatlich/jährlich wiederkehrend",
+        "ru": "обновление\nпозволить скачать календарь без переборка\nисправление недостающих месячных/годовых повторяющихся",
+        "pt": "atualizações\npermitir o download do calendário sem passwort\ncorrigir faltando mensal / ano recorrente",
+        "nl": "afhankelijkheden bijwerken\ndownloadagenda zonder wachtwoord toestaan\nvast te stellen ontbrekende maandelijks/jaarlijks terugkerende",
+        "fr": "mettre à jour les dépendances\npermettre le calendrier de téléchargement sans passwort\ncorrection manquante mensuelle/annuelle récurrente",
+        "it": "dipendenze dell'aggiornamento\nconsentire il calendario di download senza passwort\ncorrezione mancante mensile/anno ricorrente",
+        "es": "dependencias de actualización\npermitir calendario de descarga sin passwort\nfijación falta mensual/anual recurrente",
+        "pl": "uaktualnianie zależności\numożliwia pobieranie kalendarza bez hasła\nfix brakujące miesięczne / roczne powtarzające się",
+        "uk": "оновлення залежності\nможливість завантаження календаря без пасту\nфіксувати відсутні щомісячні / річні повторювані",
+        "zh-cn": "更新依赖关系\n允许不带密码的下载日历\n每月/每年重复弥补缺失"
       },
       "1.3.7": {
         "en": "improve logging\nfix passort was not stored",
@@ -67,45 +93,6 @@
         "pl": "zwiększenie zależności adapter-rdzeń\nfix json config\nuaktualnianie zależności",
         "uk": "збільшення залежності\nвиправлено json config\nоновлення залежності",
         "zh-cn": "增加依赖性适配器核心\n修复 json 配置\n更新依赖关系"
-      },
-      "1.3.3": {
-        "en": "fix config validation\nupdate dependecies\nupdate year for copyright #56\nincrease to node 18 for CI Pipeline",
-        "de": "fix config validierung\naktualisierung der abhängigkeiten\nupdatejahr für copyright #56\nerhöhung des Knotens 18 für CI Pipeline",
-        "ru": "проверка конфигурации\nобновление\n#56\nувеличение до узла 18 для трубопровода CI",
-        "pt": "corrigir validação de configuração\natualizações\nano de atualização para direitos autorais #56\naumento no nó 18 para CI Pipeline",
-        "nl": "fix config validatie\nafhankelijkheden bijwerken\nupdatejaar voor copyright #56\nverhoging tot knooppunt 18 voor CI Pipeline",
-        "fr": "corriger la validation de configuration\nmettre à jour les dépendances\nmise à jour année pour copyright #56\naugmentation au nœud 18 pour CI Pipeline",
-        "it": "correzione della convalida di configurazione\ndipendenze dell'aggiornamento\naggiornamento anno per copyright #56\naumento al nodo 18 per CI Pipeline",
-        "es": "fija la validación de config\ndependencias de actualización\naño de actualización para copyright #56\naumentar al nodo 18 para CI Pipeline",
-        "pl": "fix config walidacja\nuaktualnianie zależności\naktualizacja roku dla praw autorskich # 56\nzwiększenie do węzła 18 dla CI Pipeline",
-        "uk": "виправити перевірку\nоновлення залежності\nрік оновлення для авторського права #56\nзбільшення вузла 18 для CI Pipeline",
-        "zh-cn": "修复配置验证\n更新依赖关系\n版权更新年份56\ncI管道增加为节点18"
-      },
-      "1.3.2": {
-        "en": "update dependecies\nlinting",
-        "de": "aktualisierung der abhängigkeiten\nlining",
-        "ru": "обновление\nlinting",
-        "pt": "atualizações\nforro",
-        "nl": "afhankelijkheden bijwerken\nlinting",
-        "fr": "mettre à jour les dépendances\nlintage",
-        "it": "dipendenze dell'aggiornamento\ni",
-        "es": "dependencias de actualización\nrevestimiento",
-        "pl": "uaktualnianie zależności\nlinting",
-        "uk": "оновлення залежності\nлипкі",
-        "zh-cn": "更新依赖关系\n线性"
-      },
-      "1.3.1": {
-        "en": "update dependecies",
-        "de": "aktualisierung der abhängigkeiten",
-        "ru": "обновление",
-        "pt": "atualizações",
-        "nl": "afhankelijkheden bijwerken",
-        "fr": "mettre à jour les dépendances",
-        "it": "dipendenze dell'aggiornamento",
-        "es": "dependencias de actualización",
-        "pl": "uaktualnianie zależności",
-        "uk": "оновлення залежності",
-        "zh-cn": "更新依赖关系"
       }
     },
     "titleLang": {

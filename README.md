@@ -173,6 +173,19 @@ This project uses the following components:
   * ()
 
 -->
+### 1.4.10 (2024-10-30)
+* (mkutscher) synced with 1.3.10 from dirkhe
+* (mkutscher) re-added google calendar colors
+
+### 1.3.10 (2024-10-09)
+* (dirkhe) update dependecies
+* (dirkhe) fix calendar test functionality
+
+### 1.3.8 (2024-07-02)
+  * (dirkhe) update dependecies
+  * (dirkhe) allow download calendar without passwort
+  * (dirkhe) fix missing monthly/yearly recurring
+
 ### 1.3.7 (2024-05-20)
   * (dirkhe) improve logging
   * (dirkhe) fix passort was not stored
